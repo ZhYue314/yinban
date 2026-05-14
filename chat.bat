@@ -1,4 +1,4 @@
 @echo off
 cd /d "%~dp0"
-python launcher.py
+python main.py chat
 pause
