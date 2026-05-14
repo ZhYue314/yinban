@@ -26,7 +26,7 @@ def init(force: bool):
         if not has_key:
             click.echo("\n⚠️  未配置 API Key，聊天功能将使用模拟模式")
             click.echo("   建议配置 DeepSeek / OpenAI 的 API Key：")
-            click.echo(           "   yinban config set ai.api_key sk-xxx")
+            click.echo("   yinban config set ai.api_key sk-xxx")
 
         click.echo("\n✨ 初始化完成！试试这些命令：")
         click.echo("   yinban chat            # 和AI聊天")

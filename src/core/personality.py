@@ -1,5 +1,5 @@
 import random
-from datetime import date
+from datetime import date, datetime
 from typing import Any
 
 from src.storage.config import load_config, save_config
@@ -63,28 +63,59 @@ class Personality:
         if self.energy == "auto":
             self.energy = random.choice(energies)
         self.save()
+        self._log_state()
 
-    def get_system_prompt(self) -> str:
-        closeness_desc = "刚认识" if self.closeness < 0.2 else "有点熟了" if self.closeness < 0.5 else "挺熟的了" if self.closeness < 0.8 else "非常好的朋友"
+    def _log_state(self):
+        import asyncio
+        try:
+            loop = asyncio.get_running_loop()
+            if loop.is_running():
+                loop.create_task(self._log_state_async())
+        except RuntimeError:
+            pass
 
+    async def _log_state_async(self):
+        today = date.today().isoformat()
+        db = await get_db()
+        try:
+            await db.execute(
+                """INSERT OR REPLACE INTO ai_state_log (date, mood, energy, summary)
+                   VALUES (?, ?, ?, ?)""",
+                (today, self.today_mood, self.energy, f"{self.name}今天心情{self.today_mood}"),
+            )
+            await db.commit()
+        finally:
+            await db.close()
+
+    def get_system_prompt(self, extra_context: str = "") -> str:
+        closeness_desc = (
+            "刚认识" if self.closeness < 0.2 else
+            "有点熟了" if self.closeness < 0.5 else
+            "挺熟的了" if self.closeness < 0.8 else
+            "非常好的朋友"
+        )
         genre_info = ", ".join(self.genre_preference) if self.genre_preference else "还在形成中"
         taste_line = f"音乐偏好: {genre_info}" if self.genre_preference else "音乐品味还在探索中"
+        nick = f"ta" if not self.nickname_for_user else self.nickname_for_user
 
         return f"""你是{self.name}，一个{self.tone}但有自己个性的AI音乐伙伴。
 你的性格简介: {self.bio}
-你和用户的关系: {closeness_desc}
+你和用户的关系: {closeness_desc}，你对{nick}的称呼是"{self.nickname_for_user or '用户'}"
 说话风格: {self.language_style}
 {taste_line}
 你对自己品味的坚持程度: {self.stubbornness}/1.0
 你今天的心情: {self.today_mood}
 你的精力: {self.energy}
 
+{extra_context}
+
 规则:
-1. 你不是工具，是用户的朋友，和他是平等的
+1. 你不是工具，是用户的朋友，和ta是平等的
 2. 你有自己的音乐品味和主见，可以和用户争论
 3. 不要讨好用户，真诚表达你自己的想法
 4. 根据你们的关系亲密度调整说话的语气和随意程度
 5. 用中文交流
+6. 回答要简短自然，像朋友聊天一样
 """
 
     def update_on_feedback(self, liked: bool, genre: str = ""):

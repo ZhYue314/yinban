@@ -74,7 +74,7 @@ class LLMClient:
         return (
             f"（我需要配置 API Key 才能认真回答你。\n"
             f"请先在 config.yaml 中设置 ai.api_key，或运行：\n"
-            f"ai-podcast config set ai.api_key <你的key>\n"
+            f"yinban config set ai.api_key <你的key>\n"
             f"目前支持 DeepSeek / OpenAI 等 API。）\n\n"
             f"不过你刚才说的是：「{last[:50]}」对吗？"
         )

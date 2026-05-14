@@ -12,7 +12,7 @@ state:
   today_mood: 热情
   energy: high
 relationship:
-  closeness: 0.0
+  closeness: 0.005
   nickname_for_user: ''
 ai:
   provider: deepseek

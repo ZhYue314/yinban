@@ -1,7 +1,7 @@
 [project]
-name = "ai-podcast"
+name = "yinban"
 version = "0.1.0"
-description = "AI 音乐伙伴 - 懂你的音乐播客"
+description = "音伴 - 懂你的AI音乐伙伴"
 requires-python = ">=3.11"
 dependencies = [
     "click>=8.1.0",
@@ -15,7 +15,10 @@ dependencies = [
 ]
 
 [project.scripts]
-ai-podcast = "main:cli"
+yinban = "main:cli"
+
+[project.optional-dependencies]
+web = ["gradio>=5.0.0"]
 
 [tool.setuptools.packages.find]
 include = ["src*"]

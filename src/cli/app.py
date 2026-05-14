@@ -7,6 +7,8 @@ from .commands_config import config
 from .commands_init import init
 from .commands_login import login, logout, sync
 from .commands_discover import discover
+from .commands_report import report
+from .commands_web import web
 
 
 @click.group()
@@ -25,6 +27,8 @@ cli.add_command(login)
 cli.add_command(logout)
 cli.add_command(sync)
 cli.add_command(discover)
+cli.add_command(report)
+cli.add_command(web)
 
 
 if __name__ == "__main__":
