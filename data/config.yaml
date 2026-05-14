@@ -9,8 +9,8 @@ taste:
   stubbornness: 0.5
   discovery_ratio: 0.3
 state:
-  today_mood: auto
-  energy: auto
+  today_mood: 热情
+  energy: high
 relationship:
   closeness: 0.0
   nickname_for_user: ''

@@ -55,6 +55,38 @@ CREATE TABLE IF NOT EXISTS ai_state_log (
     energy TEXT,
     summary TEXT
 );
+
+CREATE TABLE IF NOT EXISTS all_songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    song_id TEXT UNIQUE,
+    name TEXT,
+    artist TEXT,
+    artist_id TEXT,
+    album TEXT,
+    album_id TEXT,
+    genre TEXT,
+    duration INTEGER,
+    popularity INTEGER DEFAULT 0,
+    source TEXT DEFAULT 'netease',
+    created_at TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS similar_songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    from_song_id TEXT,
+    to_song_id TEXT,
+    similarity REAL,
+    reason TEXT,
+    UNIQUE(from_song_id, to_song_id)
+);
+
+CREATE TABLE IF NOT EXISTS user_artists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    artist_id TEXT UNIQUE,
+    artist_name TEXT,
+    listen_count INTEGER DEFAULT 0,
+    last_listened TIMESTAMP
+);
 """
 
 

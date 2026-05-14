@@ -87,3 +87,8 @@ class NeteaseClient:
 
     async def like_song(self, song_id: str, like: bool = True) -> dict[str, Any]:
         return await self._get("/like", params={"id": song_id, "like": "true" if like else "false"})
+
+    def get_cookies(self) -> dict[str, str]:
+        if self._client:
+            return dict(self._client.cookies)
+        return {}
