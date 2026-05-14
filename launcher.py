@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-import subprocess
 import sys
 import os
 
-# don't force encoding - let the terminal handle it
 if hasattr(sys.stdout, "reconfigure"):
     try:
         sys.stdout.reconfigure(encoding=sys.stdout.encoding or "utf-8")
@@ -26,17 +23,19 @@ MENU = """
       音 伴 一 键 启 动
   ===============================
 
-  1. 和 AI 聊天
-  2. 每日推荐
-  3. 按心情推荐
-  4. 按场景推荐
-  5. 发现新歌手
-  6. 语音播客
-  7. 听歌报告
-  8. 查看配置
-  9. 配置向导
-  i. 初始化
-  0. 退出
+  1.  和 AI 聊天
+  2.  每日推荐
+  3.  按心情推荐
+  4.  按场景推荐
+  5.  发现新歌手
+  6.  语音播客
+  7.  听歌报告
+  8.  查看配置
+  9.  配置向导
+  L.  ♪ 登录网易云
+  S.  同步网易云数据
+  I.  初始化
+  0.  退出
 """
 
 
@@ -44,7 +43,7 @@ def main():
     while True:
         print(MENU)
         try:
-            choice = input("请选择 (0-9): ").strip()
+            choice = input("请选择: ").strip().lower()
         except (EOFError, KeyboardInterrupt):
             print()
             break
@@ -70,7 +69,11 @@ def main():
             run("config list")
         elif choice == "9":
             run("setup")
-        elif choice.lower() == "i":
+        elif choice == "l":
+            run("login")
+        elif choice == "s":
+            run("sync")
+        elif choice == "i":
             run("init")
         elif choice == "0":
             print("再见！")

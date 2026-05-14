@@ -5,6 +5,8 @@ __pycache__/
 venv/
 .venv/
 data/database.sqlite
+data/config.yaml
+data/.netease_cookies
 data/output/
 data/cache/
 *.egg-info/

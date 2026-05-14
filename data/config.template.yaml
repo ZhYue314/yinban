@@ -3,22 +3,27 @@ personality:
   tone: 毒舌
   language_style: 简短
   bio: 有点毒舌但靠谱的音乐发烧友
+
 taste:
   genre_preference: []
   era_preference: null
   stubbornness: 0.5
   discovery_ratio: 0.3
+
 state:
-  today_mood: 热情
-  energy: high
+  today_mood: auto
+  energy: auto
+
 relationship:
-  closeness: 0.005
-  nickname_for_user: ''
+  closeness: 0.0
+  nickname_for_user: ""
+
 ai:
   provider: deepseek
   model: deepseek-chat
-  api_key: ''
-  api_base: ''
+  api_key: ""  # 在这里填入你的 API Key
+  api_base: ""
+
 netease:
-  phone: ''
-  cache_dir: ./data/cache
+  phone: ""
+  cache_dir: "./data/cache"
