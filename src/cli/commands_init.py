@@ -29,9 +29,9 @@ def init(force: bool):
             click.echo("   yinban config set ai.api_key sk-xxx")
 
         click.echo("\n✨ 初始化完成！试试这些命令：")
-        click.echo("   yinban chat            # 和AI聊天")
-        click.echo("   yinban recommend       # 获取推荐")
-        click.echo("   yinban login           # 登录网易云同步数据")
-        click.echo("   yinban config list     # 查看配置")
+        click.echo("   python main.py setup        # 交互式配置向导")
+        click.echo("   python main.py chat         # 和AI聊天")
+        click.echo("   python main.py recommend    # 获取推荐")
+        click.echo("   python main.py login        # 登录网易云同步数据")
 
     asyncio.run(_run())

@@ -34,7 +34,8 @@ MENU = """
   6. 语音播客
   7. 听歌报告
   8. 查看配置
-  9. 初始化
+  9. 配置向导
+  i. 初始化
   0. 退出
 """
 
@@ -68,6 +69,8 @@ def main():
         elif choice == "8":
             run("config list")
         elif choice == "9":
+            run("setup")
+        elif choice.lower() == "i":
             run("init")
         elif choice == "0":
             print("再见！")

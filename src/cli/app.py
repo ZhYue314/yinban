@@ -9,6 +9,7 @@ from .commands_login import login, logout, sync
 from .commands_discover import discover
 from .commands_report import report
 from .commands_web import web
+from .commands_setup import setup
 
 
 @click.group()
@@ -29,6 +30,7 @@ cli.add_command(sync)
 cli.add_command(discover)
 cli.add_command(report)
 cli.add_command(web)
+cli.add_command(setup)
 
 
 if __name__ == "__main__":
